@@ -1,0 +1,26 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+
+    h1 {
+        @apply text-4xl font-semibold mb-8;
+    }
+
+    h2 {
+        @apply text-xl font-medium;
+    }
+
+    p {
+        @apply text-base text-neutral-400;
+    }
+
+    .nav-item {
+        @apply text-neutral-400 py-1.5 px-4 border border-neutral-800 rounded-full hover:bg-neutral-700;
+    }
+    
+    .selected {
+        @apply text-neutral-100 bg-neutral-700;
+    }
+}
