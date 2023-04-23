@@ -4,16 +4,16 @@
 
 @layer base {
 
-    h1 {
+    h1, .h1 {
         @apply text-4xl font-semibold mb-8;
     }
 
-    h2 {
-        @apply text-xl font-medium;
+    h2, .h2 {
+        @apply text-2xl font-medium;
     }
 
     p {
-        @apply text-base text-neutral-400;
+        @apply text-base text-neutral-400 text-justify;
     }
 
     .nav-item {
@@ -22,5 +22,17 @@
     
     .selected {
         @apply text-neutral-100 bg-neutral-700;
+    }
+
+    .action-button {
+        @apply mt-4 flex items-center gap-3 self-start rounded border border-neutral-600 stroke-neutral-100 px-4 py-1.5 text-base text-neutral-100 hover:bg-neutral-600 cursor-pointer;
+    }
+
+    .badge {
+        @apply flex items-center gap-3 self-start rounded border border-neutral-600 stroke-neutral-100 px-4 py-1.5 text-base text-neutral-100;
+    }
+
+    .stop-selected {
+        @apply text-neutral-100;
     }
 }
