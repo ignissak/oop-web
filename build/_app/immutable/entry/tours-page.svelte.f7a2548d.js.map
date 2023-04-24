@@ -1,0 +1,1 @@
+{"version":3,"file":"tours-page.svelte.f7a2548d.js","sources":["../../../../../../src/routes/tours/+page.svelte"],"sourcesContent":["<script lang=\"ts\">\r\n    import {goto} from \"$app/navigation\";\r\n\r\n    goto(\"/\");\r\n</script>"],"names":["goto"],"mappings":"iIAGI,OAAAA,EAAK,GAAG"}
