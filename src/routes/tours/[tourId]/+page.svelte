@@ -194,7 +194,7 @@
                     <div class="text-neutral-400">
                         {#each [...tour['mapPoints']] as [key, value]}
                             <button type="button" on:click|preventDefault={() => selectPoint(value['name'])}
-                                    class="cursor-pointer {chosenPoint['name'] === value['name'] ? 'stop-selected' : 'hover:text-neutral-100'}">
+                                    class="cursor-pointer block {chosenPoint['name'] === value['name'] ? 'stop-selected' : 'hover:text-neutral-100'}">
                                 {$formatStopName(value)}
                             </button>
                         {/each}
@@ -210,12 +210,8 @@
                 {#if tour['averageRating'] === -1}
                     <p>Žiadne hodnotenie</p>
                 {:else}
-                    <p>{tour['averageRating']} z 5</p>
+                    <p>{tour['averageRating'] % 1 === 0 ? tour['averageRating'].toFixed(0) : tour['averageRating'].toFixed(2)} z 5</p>
                 {/if}
-            </div>
-            <div>
-                <h3>Vytvoril</h3>
-                <p>{tour['ownerUsername']}</p>
             </div>
             <div>
                 <h3>Celkový počet zastávok</h3>

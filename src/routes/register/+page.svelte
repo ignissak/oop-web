@@ -13,7 +13,9 @@
             return;
         }
 
-        let response = window['ServiceManager'].getUserService().register(data.username, data.email, data.password);
+        console.log(data);
+
+        let response = window['ServiceManager'].getUserService().register(data.username, data.email, data.password, data.type);
 
         if (response) {
             goto('/');
@@ -47,6 +49,13 @@
             <input type="password" id="repeatPassword" name="repeatPassword" required
                    autocomplete="off"
                    class="w-64 rounded-lg border {error === 'Heslá sa nezhodujú.' ? 'border-red-600' : 'border-neutral-700' } bg-neutral-800 px-3 py-1.5 placeholder-neutral-400"/>
+        </div>
+        <div class="mb-2">
+            <label for="type" class="mb-2 block font-semibold">Typ užívateľa</label>
+            <select id="type" name="type" class="w-64 rounded-lg border border-neutral-700 bg-neutral-800 px-3 py-1.5 h-10">
+                <option selected value="free">Free</option>
+                <option value="premium">Premium</option>
+            </select>
         </div>
         {#if error}
             <p class="text-red-600 mt-1">{error}</p>

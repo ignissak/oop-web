@@ -5,8 +5,15 @@
     export let data;
     export let href;
 
+    // TODO: Current user name
+
+    // @ts-ignore
+    let user = ServiceManager.getUserService().getCurrentUser();
+    console.log(user);
+
     function logout() {
-        window['ServiceManager'].getUserService().logout();
+        // @ts-ignore
+        ServiceManager.getUserService().logout();
         goto('/login');
     }
 
@@ -33,9 +40,9 @@
             </a>
         </nav>
         <div class="flex items-center gap-2">
-            <h3>Jakub Bordáš</h3>
+            <h3>{user.username}</h3>
             <!-- TODO -->
-            <img src="http://gravatar.com/avatar/57373af31bf3e5b2d7278dd6378181db?s=32"
+            <img src="{user.getGravatarUrl()}"
                  class="max-w-[32px] rounded-full">
             <button type="button" on:click|preventDefault={logout}>
                 <svg width="24px" height="24px" stroke-width="1.5" viewBox="0 0 24 24" fill="none"
@@ -58,7 +65,7 @@
                             <a class="mb-1 h2" href="/tours/{tour.id}">{tour.name}</a>
                             {#if tour['averageRating'] !== -1}
                                 <div class="flex items-center gap-2 stroke-yellow-400 text-yellow-400">
-                                    <span>{tour['averageRating']}/5</span>
+                                    <span>{tour['averageRating'] % 1 === 0 ? tour['averageRating'].toFixed(0) : tour['averageRating'].toFixed(2)}/5</span>
                                     <svg width="20px" height="20px" stroke-width="1.5" viewBox="0 0 24 24" fill="none"
                                          xmlns="http://www.w3.org/2000/svg">
                                         <path d="M8.587 8.236l2.598-5.232a.911.911 0 011.63 0l2.598 5.232 5.808.844a.902.902 0 01.503 1.542l-4.202 4.07.992 5.75c.127.738-.653 1.3-1.32.952L12 18.678l-5.195 2.716c-.666.349-1.446-.214-1.319-.953l.992-5.75-4.202-4.07a.902.902 0 01.503-1.54l5.808-.845z"

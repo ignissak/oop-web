@@ -9,7 +9,9 @@
 
     function markAsVisited() {
         visited = true;
+        console.log(ongoingTour);
         ongoingTour.checkMapPoint(mapPoint['name']);
+        console.log("Marking as visited...");
         dispatch('update', {});
     }
 </script>
@@ -21,7 +23,7 @@
              class="mb-2 aspect-auto rounded-lg object-cover"/>
     {/if}
     <div class="flex items-center justify-between">
-        <a href="http://maps.google.com/maps?z=12&t=m&q=loc:38.9419+-78.3020" target="_blank"
+        <a href="http://maps.google.com/maps?z=12&t=m&q=loc:{mapPoint.getLatitude()}+{mapPoint.getLongitude()}" target="_blank"
            class="text-neutral-400 hover:text-neutral-100">Zobraziť na mape ↗</a>
         {#if visited === true}
             <p class="cursor-not-allowed text-neutral-700">Označiť ako navštívené ✓</p>
