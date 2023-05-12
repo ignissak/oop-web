@@ -16,7 +16,7 @@
     }
 </script>
 
-<div class="flex basis-4/6 flex-col">
+<div class="flex basis-4/6 flex-col" >
     <p class="mb-2">{mapPoint.description}</p>
     {#if mapPoint.image !== null}
         <img src="{mapPoint.image}" alt="{mapPoint.name}"

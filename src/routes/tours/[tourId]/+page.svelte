@@ -4,6 +4,9 @@
     import PointDetail from "../../../components/PointDetail.svelte";
     import {derived, writable} from "svelte/store";
     import Modal from "../../../components/Modal.svelte";
+    import { fade } from 'svelte/transition';
+    import fadeScale from "../../../js/svelte-transitions-fade-scale";
+    import {cubicInOut} from "svelte/easing";
 
     export let data: PageData;
     const tourId = parseInt(data.tourId);
@@ -83,7 +86,6 @@
     $: unselected = 5 - rating;
 
     function showModal() {
-        // TODO: Request rating from service
         // @ts-ignore
         rating = ServiceManager.getTourService().getRating(tourId);
         console.log(rating)
@@ -103,7 +105,7 @@
 
 </script>
 
-<Modal bind:showModal={isModalShown}>
+<Modal bind:showModal={isModalShown} >
     <h2 class="text-xl font-semibold mb-4">Hodnotenie výletu</h2>
     <div class="flex items-center gap-1">
         {#each Array(rating) as _, i}
@@ -149,7 +151,8 @@
     >Uložiť
     </button>
 </Modal>
-<main class="flex items-center flex-col py-8 mx-48 {isModalShown ? 'opacity-25' : ''}">
+
+<main class="flex items-center flex-col py-8 mx-48 {isModalShown ? 'opacity-25' : ''}" in:fade>
     <h1 class="mb-8 text-4xl font-bold">City Guide Walks</h1>
     <section class="w-full">
         <button type="button"
@@ -162,7 +165,7 @@
             </svg>
             Späť
         </button>
-        <img src="https://sacr3-files.s3-eu-west-1.amazonaws.com/_processed_/csm_TT.korzo_93c23fef75.jpg"
+        <img src="{tour.image}"
              class="my-4 aspect-auto max-h-64 w-full rounded-lg object-cover" alt="Trnava"/>
         <div class="mb-2 flex items-center justify-between gap-4">
             <h2>{tour['name']}</h2>
@@ -194,14 +197,14 @@
                     <div class="text-neutral-400">
                         {#each [...tour['mapPoints']] as [key, value]}
                             <button type="button" on:click|preventDefault={() => selectPoint(value['name'])}
-                                    class="cursor-pointer block {chosenPoint['name'] === value['name'] ? 'stop-selected' : 'hover:text-neutral-100'}">
+                                    class="cursor-pointer block text-left {chosenPoint['name'] === value['name'] ? 'stop-selected' : 'hover:text-neutral-100'}">
                                 {$formatStopName(value)}
                             </button>
                         {/each}
                     </div>
                 </aside>
                 <PointDetail mapPoint={chosenPoint} visited={hasVisited(chosenPoint.name)} status={relationship}
-                             ongoingTour={$ongoingData} on:update={handleUpdate}/>
+                                 ongoingTour={$ongoingData} on:update={handleUpdate} />
             </section>
         </section>
         <div class="grid grid-cols-3 gap-6">
